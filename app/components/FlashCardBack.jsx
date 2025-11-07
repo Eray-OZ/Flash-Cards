@@ -2,7 +2,7 @@ import { View, Text } from "react-native"
 import styles from '../../styles/FrontStyle.js'
 
 
-const FlashCardBack = () => {
+const FlashCardBack = ({data}) => {
 
 
 
@@ -10,17 +10,17 @@ const FlashCardBack = () => {
 
 
     return (
-        <View style={styles.card}>
+        <View style={styles.card} key={data.id}>
 
             <View style={styles.cardBanner}>
                 <Text style={styles.cardBannerText}>
-                    Cat:Test
+                    Category: {data.category}
                 </Text>
             </View>
 
             <View style={styles.cardBody}>
                 <Text style={styles.cardQuestion}>
-                    Test Card BACK
+                    {data.answer}
                 </Text>
             </View>
         </View>
