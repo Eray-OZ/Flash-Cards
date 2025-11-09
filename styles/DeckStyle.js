@@ -26,10 +26,10 @@ safeArea: {
       paddingHorizontal: 16,
       paddingTop: 16,
       paddingBottom: 8,
-      backgroundColor:colors.backgroundLight,
+      backgroundColor:"#719efa",
     },
     headerTitle: {
-      color:colors.textPrimaryLight,
+      color:'black',
       fontSize: 24, 
       fontWeight: '700', 
       fontFamily: 'Lexend_700Bold', 
@@ -44,8 +44,8 @@ safeArea: {
     deckCard: {
       flexDirection: 'row',
       gap: 16, 
-      backgroundColor: colors.cardLight,
-      padding: 16, 
+      backgroundColor: "#f17f1cff",
+      padding: 0, 
       borderRadius: 12, 
       width: '100%',
       shadowColor: '#000', 
@@ -61,7 +61,6 @@ safeArea: {
       flexGrow: 1,
     },
     cardIconContainer: {
-      backgroundColor: 'rgba(74, 144, 226, 0.2)', 
       width: 48, 
       height: 48,
       borderRadius: 12, 
@@ -74,13 +73,13 @@ safeArea: {
       justifyContent: 'center', 
     },
     cardTitle: {
-      color: colors.textPrimaryLight,
+      color: "black",
       fontSize: 18, 
       fontWeight: '600', 
       fontFamily: 'Lexend_600SemiBold',
     },
     cardSubtitle: {
-      color: colors.textSecondaryLight,
+      color: "black",
       fontSize: 14, 
       fontWeight: '400',
       marginTop: 4, 
@@ -91,10 +90,11 @@ safeArea: {
       flexShrink: 0, 
     },
     cardInfoText: {
-      color: colors.textSecondaryLight,
+      color: "black",
       fontSize: 14, 
       fontWeight: '500', 
       fontFamily: 'Lexend_500Medium',
+      marginRight:20
     },
     fab: {
       position: 'absolute',

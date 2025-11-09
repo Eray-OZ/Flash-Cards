@@ -1,22 +1,28 @@
 import { TouchableOpacity, View, Text } from "react-native"
 import styles from "../../styles/DeckStyle"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-import { router, Link } from "expo-router"
+import { Link } from "expo-router"
+import { LinearGradient } from "expo-linear-gradient"
 
-
-const CardDeckItem = ({id, title, doc, info}) => {
+const CardDeckItem = ({id, title, doc, info, linearcolor}) => {
 
 
     return(
+
         <Link href={{
             pathname:'/FlashCard/[id]',
             params:{id: id}
         }} asChild>
         <TouchableOpacity style={styles.deckCard}>
-            <View style={styles.cardLeft}>
+        <LinearGradient 
+            colors={[linearcolor[0], linearcolor[1]]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.cardLeft}
+            > 
                 <View style={styles.cardIconContainer}>
                     <MaterialCommunityIcons
-                        name="arrow-right"
+                        name="card-multiple-outline"
                         size={30} 
                         color={styles.primary}
                   />
@@ -30,8 +36,8 @@ const CardDeckItem = ({id, title, doc, info}) => {
             <View style={styles.cardInfoContainer}>
                 <Text style={styles.cardInfoText}>{info} Cards</Text>
             </View>
-            </View>
-  
+            
+            </LinearGradient>
         </TouchableOpacity>
         </Link>
     )

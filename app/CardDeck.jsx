@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import CardDeckItem from './components/CardDeckItem'
 import { LinearGradient } from 'expo-linear-gradient'
 
-
 const decks = [
   {
     id:0,
@@ -32,6 +31,14 @@ const decks = [
   },
 ];
 
+
+const LinearColors = [
+  ['#f97e15', '#f8b914'],
+  ['#ac53ee', '#e5489f'],
+  ['#df4654','#a056a3'],
+  ['#ac53ef','#e548a0']
+]
+
 const CardDeck = () => {
 
 
@@ -48,6 +55,8 @@ const CardDeck = () => {
             </View>
 
 
+
+      
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>
@@ -59,12 +68,12 @@ const CardDeck = () => {
                 title={deck.title}
                 doc={deck.subtitle}
                 info={deck.count}
+                linearcolor={LinearColors[deck.id%4]}
                 />
             ))}
         
 
         </ScrollView>
-            
         </LinearGradient>
         </SafeAreaView>
     )

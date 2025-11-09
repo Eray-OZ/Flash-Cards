@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 2 * rem, 
-    backgroundColor: '#a061ea',
+    backgroundColor: '#7b3ac4ff',
   },
 
   actionButtonIcon: {

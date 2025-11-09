@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   contentArea: {
     flex: 1,
     padding: rem,
-    paddingBottom: 1.5 * rem,
   },
 
   cardContainer: {
