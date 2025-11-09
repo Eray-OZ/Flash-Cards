@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Text } from 'react-native'
+import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Text, Image } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { router } from 'expo-router'
+import styles from '../../styles/AuthStyle.js'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { SvgUri } from 'react-native-svg';
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -37,65 +40,40 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <TextInput
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email@address.com"
-          autoCapitalize={'none'}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <TextInput
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Password"
-          autoCapitalize={'none'}
-          style={styles.input}
-        />
-      </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Flashcards</Text>
+      <TextInput
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+        placeholder="email@address.com"
+        autoCapitalize={'none'}
+        style={styles.input}
+        placeholderTextColor="#a0a0a0"
+      />
+      <TextInput
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+        secureTextEntry={true}
+        placeholder="Password"
+        autoCapitalize={'none'}
+        style={styles.input}
+        placeholderTextColor="#a0a0a0"
+      />
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <TouchableOpacity style={styles.touchable} disabled={loading} onPress={() => signInWithEmail()}>
-          <Text style={styles.text}>Sign In</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.button} disabled={loading} onPress={() => signInWithEmail()}>
+        <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} disabled={loading} onPress={() => signUpWithEmail()}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <View style={styles.supabaseContainer}>
+        <Text style={styles.supabaseText}>Powered by </Text>
+        <Image
+          source={{ uri: 'https://logo.svgcdn.com/logos/supabase-icon.png' }}
+          style={styles.supabaseLogo}
+        />
+        <Text style={styles.supabaseText}> Supabase</Text>
       </View>
-      <View style={styles.verticallySpaced}>
-        <TouchableOpacity style={styles.touchable} disabled={loading} onPress={() => signUpWithEmail()}>
-          <Text style={styles.text}>Sign Up</Text>
-          </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-  touchable: {
-    backgroundColor:"black",
-    height:20,
-    width:55
-  },
-  text:{
-    color:"white"
-  },
-  input: {
-    backgroundColor:"orange"
-  }
-  
-
-})

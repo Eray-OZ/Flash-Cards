@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+# Flashcards
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Flashcards is a mobile application built with React Native and Expo that helps users study and learn new things through flashcards. The app uses Supabase for user authentication and data storage.
 
-## Get started
+## Features
 
-1. Install dependencies
+*   User authentication (email and password)
+*   Browse and study different flashcard decks
+*   Flip flashcards to reveal the answer
+*   Create, edit, and delete flashcard decks (coming soon)
+*   Create, edit, and delete flashcards within a deck (coming soon)
 
-   ```bash
-   npm install
-   ```
+## Technologies Used
 
-2. Start the app
+*   [React Native](https://reactnative.dev/)
+*   [Expo](https://expo.dev/)
+*   [Supabase](https://supabase.io/)
+*   [React Navigation](https://reactnavigation.org/)
+*   [TypeScript](https://www.typescriptlang.org/)
 
-   ```bash
-   npx expo start
-   ```
+## Getting Started
 
-In the output, you'll find options to open the app in a
+To get a local copy up and running, follow these simple steps.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Prerequisites
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+*   Node.js
+*   npm
+*   Expo CLI
 
-## Get a fresh project
+### Installation
 
-When you're ready, run:
+1.  Clone the repo
+    ```sh
+    git clone https://github.com/Eray-OZ/Flash-Cards.git
+    ```
+2.  Install NPM packages
+    ```sh
+    npm install
+    ```
+3.  Set up your Supabase project and add your credentials to `app/lib/supabase.ts`.
+4.  Start the app
+    ```sh
+    npm start
+    ```
 
-```bash
-npm run reset-project
-```
+## Future Features
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+*   **AI-Powered Flashcard Generation:** Automatically create flashcards from user-uploaded PDFs using artificial intelligence.
+*   **Contextual Explanations:** Provide detailed, context-aware explanations for answers using embedding technology.
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
