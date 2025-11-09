@@ -54,6 +54,8 @@ const FlashCardDetail = ({ data }) => {
 
   return (
     <View style={styles.cardContainer}>
+      {warning ? <Warning message={warning} /> : null}
+      <Text style={styles.progressText}>{index+1}/{Object.keys(data).length}</Text>
       <CardFlip style={styles.card} ref={cardRef}>
         <View style={{ flex: 1 }}>
           <LinearGradient
@@ -73,12 +75,10 @@ const FlashCardDetail = ({ data }) => {
         </View>
       </CardFlip>
 
-      {warning ? <Warning message={warning} /> : ''}
-
       <View style={styles.actionButtonsContainer}>
-        <CardButton onPress={prevCard} icon={'arrow-back'} />
+        { index>0 ? (<CardButton onPress={prevCard} icon={'arrow-back'} />) : (<></>)}
         <CardButton onPress={turnOver} icon={'autorenew'} />
-        <CardButton onPress={nextCard} icon={'arrow-forward'} />
+        { index !== Object.keys(data).length - 1 ? (<CardButton onPress={nextCard} icon={'arrow-forward'} />) : (<></>)}
       </View>
     </View>
   );

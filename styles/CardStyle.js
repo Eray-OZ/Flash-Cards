@@ -6,8 +6,9 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     backgroundColor: '#1a1c1e',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    padding: rem,
   },
   card: {
     width: '100%',
@@ -38,11 +39,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginVertical: rem,
   },
+  progressText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
   actionButtonsContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     gap: rem * 1.5,

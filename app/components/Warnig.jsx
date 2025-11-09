@@ -1,7 +1,5 @@
 import {View, Text} from 'react-native'
-
-
-
+import styles from '../../styles/WarningStyle.js'
 
 const Warning = ({message}) => {
 
@@ -14,28 +12,5 @@ const Warning = ({message}) => {
         </View>
     )
 }
-
-
-
-import { StyleSheet } from 'react-native';
-
-const styles = StyleSheet.create({
-  warningContainer: {
-    backgroundColor: 'white', 
-    borderColor: '#FDE047',     
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 12,    
-    paddingHorizontal: 16,
-  },
-  warningText: {
-    textAlign: 'center',
-    color: 'red', 
-    fontSize: 16,
-    fontWeight: '600', 
-  },
-});
-
-
 
 export default Warning
