@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Text } from 'react-native'
 import { supabase } from '../lib/supabase'
+import { router } from 'expo-router'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ export default function Auth() {
 
     if (error) Alert.alert(error.message)
     setLoading(false)
+    router.replace('/CardDeck')
   }
 
   async function signUpWithEmail() {
@@ -31,6 +33,7 @@ export default function Auth() {
     if (error) Alert.alert(error.message)
     if (!session) Alert.alert('Please check your inbox for email verification!')
     setLoading(false)
+    router.replace('/CardDeck')
   }
 
   return (

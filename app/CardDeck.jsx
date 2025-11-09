@@ -45,7 +45,7 @@ const CardDeck = () => {
     return (
         <SafeAreaView style={styles.safeArea}> 
 
-        <LinearGradient 
+          <LinearGradient 
             colors={['#719efa', '#af88fb']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
@@ -57,24 +57,22 @@ const CardDeck = () => {
 
 
       
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}>
-            
-            {decks.map(deck => (
-                <CardDeckItem
-                key={deck.id}
-                id={deck.id}
-                title={deck.title}
-                doc={deck.subtitle}
-                info={deck.count}
-                linearcolor={LinearColors[deck.id%4]}
-                />
+            <ScrollView
+              style={styles.scrollView}
+              contentContainerStyle={styles.scrollViewContent}>      
+                {decks.map(deck => (
+                  <CardDeckItem
+                  key={deck.id}
+                  id={deck.id}
+                  title={deck.title}
+                  doc={deck.subtitle}
+                  info={deck.count}
+                  linearcolor={LinearColors[deck.id%4]}
+                  />
             ))}
         
-
-        </ScrollView>
-        </LinearGradient>
+            </ScrollView>
+          </LinearGradient>
         </SafeAreaView>
     )
 
