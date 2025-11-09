@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
-import FlashCard from "./components/FlashCard";
+import CardDeck from "./CardDeck";
 
 export default function Index() {
   return (
     <>
-      <FlashCard/>
+      <CardDeck/>
     </>
   );
 }

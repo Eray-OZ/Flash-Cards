@@ -1,4 +1,4 @@
-import styles from '../../styles/MainStyle'
+import styles from '../../styles/CardStyle'
 import { TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
