@@ -33,41 +33,6 @@ const decks = [
     count: 45,
     icon: 'calculate',
   },
-    {
-    id: 4,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
-    {
-    id: 5,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
-    {
-    id: 6,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
-    {
-    id: 7,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
-    {
-    id: 8,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
 ];
 
 const LinearColors = [

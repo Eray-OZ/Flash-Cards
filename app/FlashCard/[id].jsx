@@ -94,18 +94,11 @@ const FlashCard = () => {
 
 
     return (
-        <LinearGradient 
-            colors={['#719efa', '#af88fb']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.mainContainer}>
-
-
+        <View style={styles.mainContainer}>
             <View style={styles.contentArea}>
               <FlashCardDetail data={cardData[index]}/>                        
             </View>      
-
-        </LinearGradient>
+        </View>
     )
 }
 

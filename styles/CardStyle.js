@@ -3,96 +3,72 @@ import { StyleSheet } from 'react-native';
 const rem = 16;
 
 const styles = StyleSheet.create({
-
-  mainContainer: {
-    flex: 1,
-  },
-
-  contentArea: {
-    flex: 1,
-    padding: rem,
-    paddingBottom: 1.5 * rem,
-  },
-
   cardContainer: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: '#1a1c1e',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-
   card: {
     width: '100%',
-    maxWidth: 28 * rem,
-    height: '70%', 
+    height: '70%',
     maxHeight: 600,
-    borderRadius: 3 * rem, 
-    overflow: 'hidden',
-    backgroundColor: '#f5f5dc',
+    borderRadius: rem * 0.75,
+    padding: rem * 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 15,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
     elevation: 8,
-  },
-
-  
-
-  cardBanner: {
-    width: '100%',
-    backgroundColor: '#1E3A8A',
-    paddingVertical: 0.75 * rem,
-    paddingHorizontal: 1.5 * rem,
-  },
-
-  cardBannerText: {
-    color: '#ffffff',
-    fontSize: 0.875 * rem, 
-    fontWeight: '400',
-    lineHeight: 1.5 * (0.875 * rem), 
-  },
-
-  cardBody: {
-    flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center',
-    padding: 1.5 * rem,
-    gap: 1.5 * rem, 
+    alignItems: 'center',
   },
-
   cardQuestion: {
-    color: '#111827',
-    fontSize: 1.875 * rem, 
-    fontWeight: '700',
-    lineHeight: 1.25 * (1.875 * rem), 
-    letterSpacing: -0.015 * (1.875 * rem),
-    textAlign: 'center', 
+    color: '#ffffff',
+    fontSize: rem * 1.875,
+    fontWeight: 'bold',
+    lineHeight: rem * 2.25,
+    textAlign: 'center',
   },
-
-      actionButtonsContainer: {
-    flexShrink: 0,
+  hr: {
+    borderBottomColor: 'rgba(255, 255, 255, 0.3)',
+    borderBottomWidth: 1,
+    marginVertical: rem,
+  },
+  actionButtonsContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 1.5 * rem,
-    paddingTop: 1.5 * rem,
+    gap: rem * 1.5,
+    padding: rem * 1.5,
+    backgroundColor: 'transparent',
   },
-
   actionButton: {
-    width: 4 * rem, 
-    height: 4 * rem, 
+    width: rem * 4,
+    height: rem * 4,
+    borderRadius: rem * 2,
+    backgroundColor: '#2c2f33',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
-    borderRadius: 2 * rem, 
-    backgroundColor: '#7b3ac4ff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-
   actionButtonIcon: {
-    color: '#ffffff', 
-    fontSize: 1.875 * rem, 
-  }
-
+    color: '#ffffff',
+    fontSize: rem * 2.25,
+  },
 });
 
-
-export default styles
+export default styles;

@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
 
   mainContainer: {
     flex: 1,
+    backgroundColor: '#1a1c1e',
     },
 
   contentArea: {
