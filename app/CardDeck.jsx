@@ -5,7 +5,9 @@ import CardDeckItem from './components/CardDeckItem';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../lib/supabase';
 import { useEffect, useState } from 'react';
-import * as DocumentPicker from 'expo-document-picker'
+import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system/legacy';
+import { decode } from 'base64-arraybuffer';
 
 
 const LinearColors = [
@@ -46,7 +48,6 @@ const CardDeck = () => {
 
 
   useEffect(() => {
-
     const fetchDecks = async () => {
         const {data, error} = await supabase
         .from("decks")
@@ -68,35 +69,49 @@ const CardDeck = () => {
   
 
   const pickAndUploadPdfDocument = async () => {
-  try {
-    const result = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf', 
-      copyToCacheDirectory: true, 
-    });
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: 'application/pdf',
+        copyToCacheDirectory: true,
+      });
 
-    if (!result.assets || result.assets.length === 0) {
+      if (!result.assets || result.assets.length === 0) {
         console.log('PDF Picking cancelled or failed.');
         return;
+      }
+
+      const asset = result.assets[0];
+
+      const base64 = await FileSystem.readAsStringAsync(asset.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      const arrayBuffer = decode(base64);
+
+      const filePath = `${userId}/${Date.now()}_${asset.name}`;
+
+      const { data, error } = await supabase.storage
+        .from('files')
+        .upload(filePath, arrayBuffer, {
+          contentType: asset.mimeType || 'application/pdf',
+          upsert: true,
+        });
+
+      if (error) {
+        console.error('Upload Error:', error);
+        return;
+      }
+
+      const { data: { publicUrl } } = supabase.storage.from('files').getPublicUrl(filePath);
+
+      console.log('File uploaded successfully!');
+      console.log('Public URL:', publicUrl);
+      console.log('Supabase upload data:', data);
+
+    } catch (err) {
+      console.error('File Selection or Upload Error:', err);
     }
-
-    const file = result.assets[0];
-
-
-    const {data, error} = await supabase
-    .storage
-    .from('files')
-    .upload(userId + "/" + Date.now(), file, {
-    contentType: file.mimeType || 'application/pdf', 
-    upsert: true
-})
-    
-    if (error) {console.log(error)}
-
-  } catch (err) {
-    console.error('File Selection Error:', err);
-  }
-
-};
+  };
 
 
 
