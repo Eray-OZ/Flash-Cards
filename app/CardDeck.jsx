@@ -3,7 +3,7 @@ import styles from '../styles/DeckStyle';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CardDeckItem from './components/CardDeckItem';
 import { MaterialIcons } from '@expo/vector-icons';
-import { supabase } from './lib/supabase';
+import { supabase } from '../lib/supabase';
 import { useEffect, useState } from 'react';
 
 

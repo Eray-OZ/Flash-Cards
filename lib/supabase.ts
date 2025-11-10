@@ -2,7 +2,7 @@ import { AppState, Platform } from 'react-native'
 import 'react-native-url-polyfill/auto'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient, processLock } from '@supabase/supabase-js'
-import secrets from '../../secrets/secrets'
+import secrets from '../secrets/secrets'
 
 const supabaseUrl = secrets.SUPABASE_URL
 const supabaseAnonKey = secrets.SUPABASE_KEY
