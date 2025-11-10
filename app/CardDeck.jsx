@@ -3,37 +3,12 @@ import styles from '../styles/DeckStyle';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CardDeckItem from './components/CardDeckItem';
 import { MaterialIcons } from '@expo/vector-icons';
+import { supabase } from './lib/supabase';
+import { useEffect, useState } from 'react';
 
-const decks = [
-  {
-    id: 0,
-    title: 'World Capitals',
-    subtitle: 'All countries and their capitals.',
-    count: 195,
-    icon: 'public',
-  },
-  {
-    id: 1,
-    title: 'Periodic Table',
-    subtitle: 'Mastering the elements of the periodic table.',
-    count: 118,
-    icon: 'science',
-  },
-  {
-    id: 2,
-    title: 'Art History',
-    subtitle: 'Key movements from the Renaissance.',
-    count: 88,
-    icon: 'palette',
-  },
-  {
-    id: 3,
-    title: 'Calculus Formulas',
-    subtitle: 'Essential formulas and theorems.',
-    count: 45,
-    icon: 'calculate',
-  },
-];
+
+
+
 
 const LinearColors = [
   ['#4a90e2', '#50e3c2'], // Original blue-green
@@ -46,7 +21,39 @@ const LinearColors = [
   ['#d35400', '#f39c12'], // Orange
 ];
 
+
+
+
 const CardDeck = () => {
+
+  const [decks, setDecks] = useState([])
+
+  useEffect(() => {
+
+    const fetchDecks = async () => {
+        const {data, error} = await supabase
+        .from("decks")
+        .select('*, flashcards(count)')
+        .order('created_at', { ascending: false })
+
+        
+        if (error) {
+          console.error(error)
+          return
+        }
+        setDecks(data)
+      }
+
+    fetchDecks()
+
+  }, [])
+
+
+
+
+
+
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -58,17 +65,19 @@ const CardDeck = () => {
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}
         >
-          {decks.map((deck) => (
-            <CardDeckItem
-              key={deck.id}
-              id={deck.id}
-              title={deck.title}
-              doc={deck.subtitle}
-              info={`${deck.count} Cards`}
-              icon={deck.icon}
-              linearcolor={LinearColors[deck.id % 8]}
-            />
-          ))}
+        
+        {decks.map(deck => (
+          <CardDeckItem
+          key={deck.id}
+          id={deck.id}
+          title={deck.title}
+          doc={deck.description}
+          info={deck.flashcards && deck.flashcards.length > 0 ? deck.flashcards[0].count : 0}
+          icon={deck.category}
+          linearcolor={LinearColors[decks.length%8]}
+          />
+        ))}
+ 
         </ScrollView>
 
         <TouchableOpacity style={styles.fab}>

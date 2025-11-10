@@ -4,7 +4,6 @@ import { supabase } from '../lib/supabase'
 import { router } from 'expo-router'
 import styles from '../../styles/AuthStyle.js'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { SvgUri } from 'react-native-svg';
 
 export default function Auth() {
   const [email, setEmail] = useState('')
