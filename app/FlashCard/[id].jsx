@@ -10,7 +10,6 @@ const FlashCard = () => {
 
 
     const { id } = useLocalSearchParams(); 
-    const [index, setIndex] = useState(id)
     const [flashCards, setFlashCards] = useState([])
 
     useEffect(() => {
@@ -20,7 +19,7 @@ const FlashCard = () => {
       .select('*')
       .eq("deck_id", id)
       .order('created_at', { ascending: false })
-
+      
 
       if (error) {
         console.error(error)
@@ -42,7 +41,7 @@ const FlashCard = () => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.contentArea}>
-              <FlashCardDetail data={flashCards}/>
+              {flashCards && flashCards.length > 0 ? <FlashCardDetail data={flashCards}/> : null}
             </View>      
         </View>
     )

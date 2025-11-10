@@ -5,9 +5,7 @@ import CardDeckItem from './components/CardDeckItem';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../lib/supabase';
 import { useEffect, useState } from 'react';
-
-
-
+import * as DocumentPicker from 'expo-document-picker'
 
 
 const LinearColors = [
@@ -27,6 +25,25 @@ const LinearColors = [
 const CardDeck = () => {
 
   const [decks, setDecks] = useState([])
+  const [userId, setUserId] = useState('')
+
+
+  const getUser = async () => {
+    try {
+      const {data: { user }} = await supabase.auth.getUser()
+      if (user!==null){
+        setUserId(user.id)
+      }
+      else {
+        setUserId('')
+      }      
+    } catch (error) {
+      console.error("Auth error: " + error)
+    }
+  }
+
+
+
 
   useEffect(() => {
 
@@ -35,8 +52,7 @@ const CardDeck = () => {
         .from("decks")
         .select('*, flashcards(count)')
         .order('created_at', { ascending: false })
-
-        
+       
         if (error) {
           console.error(error)
           return
@@ -44,10 +60,43 @@ const CardDeck = () => {
         setDecks(data)
       }
 
+    getUser()
     fetchDecks()
 
   }, [])
 
+  
+
+  const pickAndUploadPdfDocument = async () => {
+  try {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: 'application/pdf', 
+      copyToCacheDirectory: true, 
+    });
+
+    if (!result.assets || result.assets.length === 0) {
+        console.log('PDF Picking cancelled or failed.');
+        return;
+    }
+
+    const file = result.assets[0];
+
+
+    const {data, error} = await supabase
+    .storage
+    .from('files')
+    .upload(userId + "/" + Date.now(), file, {
+    contentType: file.mimeType || 'application/pdf', 
+    upsert: true
+})
+    
+    if (error) {console.log(error)}
+
+  } catch (err) {
+    console.error('File Selection Error:', err);
+  }
+
+};
 
 
 
@@ -80,7 +129,7 @@ const CardDeck = () => {
  
         </ScrollView>
 
-        <TouchableOpacity style={styles.fab}>
+        <TouchableOpacity style={styles.fab} onPress={pickAndUploadPdfDocument}>
           <MaterialIcons name="add" size={32} color="#1a1c1e" />
         </TouchableOpacity>
       </View>

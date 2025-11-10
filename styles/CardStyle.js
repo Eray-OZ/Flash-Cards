@@ -15,7 +15,13 @@ const styles = StyleSheet.create({
     height: '70%',
     maxHeight: 600,
     borderRadius: rem * 0.75,
-    padding: rem * 2,
+  },
+  cardFace: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    borderRadius: rem * 0.75,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -24,8 +30,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
     elevation: 8,
+  },
+  cardBack: {
+    // transform: [{ rotateY: '180deg' }] // Initial rotation is handled by reanimated
+  },
+  cardGradient: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: rem * 0.75,
+    padding: rem * 2,
   },
   cardQuestion: {
     color: '#ffffff',

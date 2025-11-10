@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, TouchableOpacity, View, TextInput, Text, Image } from 'react-native'
+import { Alert, TouchableOpacity, View, TextInput, Text, Image } from 'react-native'
 import { supabase } from '../../lib/supabase'
 import { router } from 'expo-router'
 import styles from '../../styles/AuthStyle.js'

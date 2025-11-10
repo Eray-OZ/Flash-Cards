@@ -1,31 +1,50 @@
 import { View, Text } from 'react-native';
 import styles from '../../styles/CardStyle.js';
 import CardButton from './CardButton.jsx';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Warning from './Warnig.jsx';
 import { LinearGradient } from 'expo-linear-gradient';
-import CardFlip from 'react-native-card-flip';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, interpolate } from 'react-native-reanimated';
 
 const FlashCardDetail = ({ data }) => {
-  const [isTurn, setIsTurn] = useState(false);
   const [index, setIndex] = useState(0);
   const [warning, setWarning] = useState('');
-  const cardRef = useRef();
+
+  const rotate = useSharedValue(0);
+
+  const frontAnimatedStyle = useAnimatedStyle(() => {
+    const rotateValue = interpolate(rotate.value, [0, 1], [0, 180]);
+    return {
+      transform: [{ rotateY: `${rotateValue}deg` }],
+    };
+  });
+
+  const backAnimatedStyle = useAnimatedStyle(() => {
+    const rotateValue = interpolate(rotate.value, [0, 1], [180, 360]);
+    return {
+      transform: [{ rotateY: `${rotateValue}deg` }],
+    };
+  });
 
   const turnOver = () => {
-    cardRef.current.flip();
-    setIsTurn((prev) => !prev);
+    rotate.value = withTiming(rotate.value === 0 ? 1 : 0, { duration: 500 });
   };
+
+  const resetCard = (callback) => {
+    if (rotate.value !== 0) {
+      rotate.value = withTiming(0, { duration: 500 });
+    }
+    // Execute callback after flip animation duration
+    setTimeout(() => {
+        if(callback) callback();
+    }, rotate.value !== 0 ? 500 : 0);
+  }
 
   const nextCard = () => {
     if (index === Object.keys(data).length - 1) {
       setWarning('Last Card');
     } else {
-      if (isTurn) {
-        cardRef.current.flip();
-      }
-      setIndex((prevIndex) => prevIndex + 1);
-      setIsTurn(false);
+      resetCard(() => setIndex((prevIndex) => prevIndex + 1));
     }
   };
 
@@ -33,11 +52,7 @@ const FlashCardDetail = ({ data }) => {
     if (index === 0) {
       setWarning('First Card');
     } else {
-      if (isTurn) {
-        cardRef.current.flip();
-      }
-      setIndex((prevIndex) => prevIndex - 1);
-      setIsTurn(false);
+      resetCard(() => setIndex((prevIndex) => prevIndex - 1));
     }
   };
 
@@ -52,33 +67,39 @@ const FlashCardDetail = ({ data }) => {
     }
   }, [warning]);
 
+  // Reset flip state when card index changes, without animation
+  useEffect(() => {
+    rotate.value = 0;
+  }, [index]);
+
+
   return (
     <View style={styles.cardContainer}>
       {warning ? <Warning message={warning} /> : null}
-      <Text style={styles.progressText}>{index+1}/{Object.keys(data).length}</Text>
-      <CardFlip style={styles.card} ref={cardRef}>
-        <View style={{ flex: 1 }}>
-          <LinearGradient
+      <Text style={styles.progressText}>{index + 1}/{Object.keys(data).length}</Text>
+      <View style={styles.card}>
+        <Animated.View style={[styles.cardFace, frontAnimatedStyle]}>
+           <LinearGradient
             colors={['#4a90e2', '#50e3c2']}
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderRadius: 12 }}
+            style={styles.cardGradient}
           >
             <Text style={styles.cardQuestion}>{data[index].question}</Text>
           </LinearGradient>
-        </View>
-        <View style={{ flex: 1 }}>
-          <LinearGradient
+        </Animated.View>
+        <Animated.View style={[styles.cardFace, styles.cardBack, backAnimatedStyle]}>
+           <LinearGradient
             colors={['#ac53ee', '#e5489f']}
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderRadius: 12 }}
+            style={styles.cardGradient}
           >
             <Text style={styles.cardQuestion}>{data[index].answer}</Text>
           </LinearGradient>
-        </View>
-      </CardFlip>
+        </Animated.View>
+      </View>
 
       <View style={styles.actionButtonsContainer}>
-        { index>0 ? (<CardButton onPress={prevCard} icon={'arrow-back'} />) : (<></>)}
+        {index > 0 ? (<CardButton onPress={prevCard} icon={'arrow-back'} />) : (<View style={{width: 64}} />)}
         <CardButton onPress={turnOver} icon={'autorenew'} />
-        { index !== Object.keys(data).length - 1 ? (<CardButton onPress={nextCard} icon={'arrow-forward'} />) : (<></>)}
+        {index !== Object.keys(data).length - 1 ? (<CardButton onPress={nextCard} icon={'arrow-forward'} />) : (<View style={{width: 64}} />)}
       </View>
     </View>
   );
